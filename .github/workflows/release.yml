@@ -1,28 +1,28 @@
-name: Release
+name: CPU Load Alert Release
 
 on:
   push:
     tags:
-      -  'v*' # This triggers on tags like v1.0.0, v2.0.0 like wise
-    branches:
-      - main # Only triggers when tags are pushed to the main branch
+      - 'v*'  # Triggers the workflow only when a new tag with 'v*' (e.g., v1.0.0) is pushed.
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v4
 
-      - name: Create Release
+      - name: Create GitHub Release
+        id: create_release
         uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Ensure you have this secret configured in GitHub settings
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
-          body: |
-            This is an automated release.
-            fror details, checkout the [README](https://github.com/thurunu/cpu-load-alert#readme).
           draft: false
           prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Pass the GitHub token
+          body: |
+            ## Changelog
+            - Describe changes in this release
+            - Another change here
