@@ -5,8 +5,11 @@ on:
     branches:
       - main  # Only triggers when code is pushed to the main branch
 
+permissions: 
+  contents: write  # Grants write permission to create releases
+
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -16,7 +19,7 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Ensure this secret is set in your repository
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.sha }}  # Uses commit SHA as the tag
           release_name: Release ${{ github.sha }}
