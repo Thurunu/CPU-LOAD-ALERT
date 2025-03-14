@@ -27,5 +27,4 @@ jobs:
           prerelease: false
           body: |
             ## Changelog
-            - Describe changes in this release
-            - Another change here
+            - This is th initial release
