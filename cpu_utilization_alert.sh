@@ -6,7 +6,7 @@ THRESHOLD=0.8
 # Get the number of CPU cores
 CORES=$(nproc --all)
 
-# Loop indefinitely to monitor CPU load
+# Loop continously to monitor CPU load
 while true; do
     # Get the current 1-minute load average
     CURRENT_LOAD=$(cat /proc/loadavg | awk '{print $1}')
